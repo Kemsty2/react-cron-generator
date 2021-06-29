@@ -1,23 +1,37 @@
-import React, { Component } from 'react';
+import React from "react";
 
-export default class MinutesCron extends Component {
-
-    onChange(e) {
-        if((e.target.value > 0 && e.target.value < 60) || e.target.value === '') {
-            let val = ['0','*','*','*','*','?','*']
-            val[1] = e.target.value ? `0/${e.target.value}` : val[1];  
-            this.props.onChange(val)
-        } 
+const MinutesCron = ({
+  onChange,
+  value = ["0", "0/1", "*", "*", "*", "?", "*"],
+  translateFn,
+  onError,
+}) => {
+  const handleChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    value = e.target.value;
+    if (value > 0 && value < 60) {
+      let val = ["0", "*", "*", "*", "*", "?", "*"];
+      val[1] = value ? `0/${value}` : val[1];
+      this.props.onChange(val);
+    } else {
+      if (onError) onError("Invalid Value");
     }
+  };
 
-    render() {
-        const translateFn = this.props.translate;
-        let value = this.props.value;
-        if(value && value.length > 1) {
-            value = value[1].split('/')[1];
-        }
-        return (<div className="well">   
-               {translateFn('Every')} <input type="Number" onChange={this.onChange.bind(this)} value={value} min={1} max={60} /> {translateFn('minute(s)')}
-        </div>)
-    }
-}
+  return (
+    <div>
+      <span>{translateFn("Every")}</span>
+      <input
+        type="Number"
+        onChange={handleChange}
+        value={value}
+        min={1}
+        max={60}
+      />{" "}
+      {translateFn("minute(s)")}
+    </div>
+  );
+};
+
+export default MinutesCron;

@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+}
+
+.l-tabs {
+  font-family: arial;
+  margin: 0 auto;
+  width: 70%;
+  text-align: center;
+  margin-top: 15vh;
+}
+
+.l-tabs .tabs-buttons {
+  margin-bottom: 50px;
+}
+
+.l-tabs .tabs-buttons button {
+  margin-right: 15px;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.4);
+  transition: all ease-in-out 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+.l-tabs .tabs-buttons button.active {
+  border-bottom: 2px solid #42b3f4;
+  color: black;
+}
